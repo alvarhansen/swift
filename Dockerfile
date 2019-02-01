@@ -15,5 +15,8 @@ RUN apt-get install -y nodejs
 RUN git clone https://github.com/danger/danger-swift.git _danger-swift
 RUN cd _danger-swift && make install
 
+RUN git clone https://github.com/realm/SwiftLint.git _SwiftLint
+RUN cd _SwiftLint && git submodule update --init --recursive; make install
+
 # Run Danger Swift via Danger JS, allowing for custom args
 ENTRYPOINT ["npx", "--package", "danger@6.1.13", "danger-swift", "ci"]
